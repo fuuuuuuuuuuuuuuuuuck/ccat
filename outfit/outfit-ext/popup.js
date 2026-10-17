@@ -9,7 +9,7 @@ function showUpdate(u) {
   a.target = '_blank';
   a.textContent = 'open the repo';
   banner.textContent = `Update ${u.version} available: `;
-  banner.append(a, ' (download it, unzip, then reload the extension)');
+  banner.append(a, ' (download dat, unzip dat, then load dat extension 👀👀)');
   banner.hidden = false;
 }
 chrome.storage.local.get('update').then(r => showUpdate(r.update));
