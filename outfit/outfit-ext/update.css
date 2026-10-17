@@ -1,0 +1,43 @@
+.ssupd {
+  position: fixed;
+  inset: 0;
+  z-index: 100001;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ssupd .modalPopup {
+  display: block;
+  position: static;
+  background: #ffffe0;
+  border: 1px solid #000;
+  color: #3a7d1e;
+  font-size: 12px;
+  min-width: 260px;
+  max-width: 420px;
+  text-align: left;
+}
+.ssupd .ssupd-body {
+  margin: 1.5em;
+}
+.ssupd .ssupd-lines {
+  color: #555;
+  margin-top: 0.3em;
+}
+.ssupd .ssupd-line {
+  margin-top: 0.2em;
+}
+.ssupd .ssupd-hide {
+  margin-top: 0.8em;
+}
+.ssupd .ssupd-hide label {
+  cursor: pointer;
+}
+.ssupd .ssupd-btns {
+  text-align: center;
+  margin-top: 1em;
+}
+.ssupd .ssupd-btns .Button {
+  margin: 0 3px;
+}
