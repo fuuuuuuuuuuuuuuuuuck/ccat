@@ -17,7 +17,7 @@
     const u = new URL(location.href).searchParams;
     return { c: u.get('c') || 'Hats', p: Math.max(1, parseInt(u.get('p'), 10) || 1), q: u.get('q') || '', pick: u.get('pick') || '' };
   };
-  const listKey = s => `${s.c}|${s.q}`;
+  const listKey = s => `${s.c}|${s.q}|${s.pick}`;
   const pageUrl = (s, p) => `${base}?${qs({ c: s.c, p, q: s.q, pick: s.pick })}`;
 
   const pageInfo = doc => {
@@ -62,7 +62,7 @@
     if (hit) return hit;
     try {
       const sig = wornSig();
-      const res = await fetch(`${base}?${qs({ c: s.c, p: n, q: s.q })}`, { credentials: 'same-origin' });
+      const res = await fetch(`${base}?${qs({ c: s.c, p: n, q: s.q, pick: s.pick })}`, { credentials: 'same-origin' });
       if (!res.ok) return null;
       const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
       const { n: got, last } = pageInfo(doc);
@@ -107,7 +107,6 @@
 
     if (cfg.rows <= DEFAULT) return;
     const s = state();
-    if (s.pick) return;
     const k = cfg.rows / DEFAULT;
     const mine = `${cfg.rows}|${listKey(s)}|${s.p}`;
     if (pager.dataset.ssMine === mine) return;
@@ -141,9 +140,10 @@
   async function apply() {
     if (!ready || cfg.rows <= DEFAULT) return true;
     const s = state();
-    if (s.pick) return true;
     let options = stockOptions();
     if (!options) return true;
+    // still streaming in: the parser would keep adding the site's own cards after ours (mixed/duplicated page)
+    if (document.readyState === 'loading' && !options.nextElementSibling) return true;
 
     const k = cfg.rows / DEFAULT;
     const keyNow = () => { const t = state(); return `${cfg.rows}|${listKey(t)}|${t.p}|${wornSig()}`; };
@@ -206,10 +206,11 @@
   }
 
   new MutationObserver(() => { tick(); }).observe(document, { childList: true, subtree: true });
+  document.addEventListener('DOMContentLoaded', () => { tick(); });
 
   // with bigger pages the site's own pager link would fetch one small page; build ours straight from the cache instead
   document.addEventListener('click', e => {
-    if (!ready || cfg.rows <= DEFAULT || state().pick || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (!ready || cfg.rows <= DEFAULT || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
     const a = e.target.closest && e.target.closest('.AttireChooser .FooterPager a[href]');
     if (!a) return;
     let u;

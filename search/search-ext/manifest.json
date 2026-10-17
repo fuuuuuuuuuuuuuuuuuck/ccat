@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "wardrobe search",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "search dat 👀👀 and qol ❤❤❤ (🙂 verity respect button)",
   "permissions": [
     "storage",
@@ -61,6 +61,19 @@
         "glow.css"
       ],
       "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://ceiling.cat/*",
+        "*://*.ceiling.cat/*"
+      ],
+      "js": [
+        "egg.js"
+      ],
+      "css": [
+        "egg.css"
+      ],
+      "run_at": "document_idle"
     }
   ],
   "action": {
@@ -69,5 +82,17 @@
   },
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "egg/thumb.gif",
+        "egg/clip.mp4"
+      ],
+      "matches": [
+        "*://ceiling.cat/*",
+        "*://*.ceiling.cat/*"
+      ]
+    }
+  ]
 }

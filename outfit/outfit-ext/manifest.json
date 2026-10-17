@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "outfits",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "outfits dat 👀👀",
   "permissions": [
     "storage",

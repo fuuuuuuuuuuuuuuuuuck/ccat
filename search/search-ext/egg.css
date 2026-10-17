@@ -1,0 +1,28 @@
+#ss-egg-foot {
+  clear: both;
+  text-align: right;
+  padding: 6px;
+  line-height: 0;
+}
+#ss-egg {
+  width: 36px;
+  height: auto;
+  cursor: pointer;
+  opacity: .85;
+  border-radius: 0;
+}
+#ss-egg:hover { opacity: 1; }
+#ss-egg-wrap {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .75);
+  z-index: 2147483600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#ss-egg-wrap video {
+  max-height: 88vh;
+  max-width: 92vw;
+  border-radius: 0;
+}
