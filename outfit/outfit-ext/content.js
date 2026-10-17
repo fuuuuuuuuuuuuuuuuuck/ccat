@@ -399,7 +399,11 @@
     if (!cats) return;
     let changed = false;
 
-    if (tab.parentNode !== cats) { cats.append(sep, tab); changed = true; }
+    if (tab.parentNode !== cats) {
+      const pg = cats.querySelector(':scope > .FooterPager'); // the search ext keeps its pager in here; tab goes before it
+      pg ? pg.before(sep, tab) : cats.append(sep, tab);
+      changed = true;
+    }
     if (panel.parentNode !== chooser) {
       const [options] = stock();
       (options || cats).after(panel);
