@@ -375,7 +375,7 @@
 
   const stock = () => {
     const chooser = document.querySelector('.AttireChooser');
-    return chooser ? [chooser.querySelector(':scope > .AttireOptions:not(#ox-panel)'), chooser.querySelector(':scope > .FooterPager')] : [];
+    return chooser ? [chooser.querySelector(':scope > .AttireOptions:not(#ox-panel)'), chooser.querySelector('.FooterPager')] : [];
   };
 
   function open() {
