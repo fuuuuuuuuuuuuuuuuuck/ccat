@@ -209,7 +209,7 @@
 
   // with bigger pages the site's own pager link would fetch one small page; build ours straight from the cache instead
   document.addEventListener('click', e => {
-    if (!ready || cfg.rows <= DEFAULT || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (!ready || cfg.rows <= DEFAULT || state().pick || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
     const a = e.target.closest && e.target.closest('.AttireChooser .FooterPager a[href]');
     if (!a) return;
     let u;
