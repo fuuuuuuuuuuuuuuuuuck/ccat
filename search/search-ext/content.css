@@ -50,6 +50,9 @@
   pointer-events: none;
 }
 
-.AttireChooser > .FooterPager.ss-pager {
-  margin: 4px 0;
+.AttireChooser .AttireCategory > .FooterPager.ss-pager {
+  margin: 3px 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
 }

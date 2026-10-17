@@ -91,7 +91,7 @@
   function fixPager() {
     const chooser = document.querySelector('.AttireChooser');
     const cats = chooser && chooser.querySelector(':scope > .AttireCategory');
-    const pager = chooser && chooser.querySelector(':scope > .FooterPager');
+    const pager = chooser && chooser.querySelector('.FooterPager');
     if (!cats || !pager) return;
     // wait until the parser is past the pager, so nothing gets appended to it after we change it
     if (!pager.dataset.ssSeen) {
@@ -99,9 +99,10 @@
       pager.dataset.ssSeen = '1';
     }
 
-    if (cfg.pager && pager.previousElementSibling !== cats) {
+    // goes inside the category block (in the gap under the links), so it can't crowd the site's search row
+    if (cfg.pager && pager.parentNode !== cats) {
       pager.classList.add('ss-pager');
-      cats.after(pager);
+      cats.append(pager);
     }
 
     if (cfg.rows <= DEFAULT) return;
@@ -209,7 +210,7 @@
   // with bigger pages the site's own pager link would fetch one small page; build ours straight from the cache instead
   document.addEventListener('click', e => {
     if (!ready || cfg.rows <= DEFAULT || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
-    const a = e.target.closest && e.target.closest('.AttireChooser > .FooterPager a[href]');
+    const a = e.target.closest && e.target.closest('.AttireChooser .FooterPager a[href]');
     if (!a) return;
     let u;
     try { u = new URL(a.href, location.href); } catch (err) { return; }
